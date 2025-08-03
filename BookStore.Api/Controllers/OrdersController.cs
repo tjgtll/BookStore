@@ -21,11 +21,12 @@ public class OrdersController : Controller
     }
 
     /// <summary>
-    /// Получить список заказов
+    /// Retrieves a list of orders with optional filtering
     /// </summary>
-    /// <param name="orderNumber">Айди заказа</param>
-    /// <param name="orderDate">кто это будет читать?</param>
-    /// <response code="200">Возвращает список заказов</response>
+    /// <param name="orderNumber">Filter by order ID (positive integer)</param>
+    /// <param name="orderDate">Filter by exact order date</param>
+    /// <returns>List of order DTOs</returns>
+    /// <response code="200">Returns the list of orders</response>
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> Get([FromQuery][Range(1, int.MaxValue)] int? orderNumber,
@@ -36,11 +37,12 @@ public class OrdersController : Controller
     }
 
     /// <summary>
-    /// Создать новый заказ
+    /// Creates a new order
     /// </summary>
-    /// <param name="orderDto">Данные заказа</param>
-    /// <response code="201">Возвращает созданный заказ</response>
-    /// <response code="400">Если данные невалидны</response>
+    /// <param name="orderDto">Order creation data</param>
+    /// <returns>Newly created order</returns>
+    /// <response code="201">Returns the created order</response>
+    /// <response code="400">If the input data is invalid</response>
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]

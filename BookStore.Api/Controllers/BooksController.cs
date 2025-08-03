@@ -19,11 +19,12 @@ public class BooksController : Controller
     }
 
     /// <summary>
-    /// Получить список кинг
+    /// Gets all books with optional filtering
     /// </summary>
-    /// <param name="title">Имя книги</param>
-    /// <param name="releaseDate">Дата выпуска книги</param>
-    /// <response code="200">Возвращает список книг</response>
+    /// <param name="title">Filter by book title (partial match)</param>
+    /// <param name="releaseDate">Filter by exact release date</param>
+    /// <returns>List of book</returns>
+    /// <response code="200">Returns the list of books</response>
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAll([FromQuery] string? title,
@@ -34,11 +35,12 @@ public class BooksController : Controller
     }
 
     /// <summary>
-    /// Получить книгу по айди
+    /// Gets a single book by its ID
     /// </summary>
-    /// <param name="id">Айди книги</param>
-    /// <response code="200">Возврашает книгу</response>
-    /// <response code="404">Если по айди книги нет</response>
+    /// <param name="id">Book ID (must be positive integer)</param>
+    /// <returns>Book details</returns>
+    /// <response code="200">Returns the requested book</response>
+    /// <response code="404">If book with specified ID doesn't exist</response>
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
